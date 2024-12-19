@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  database:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: computer_store
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  app:
+    build:
+      context: .
+    depends_on:
+      - database
+    ports:
+      - "8089:8089"
+    environment:
+      SPRING_PROFILES_ACTIVE: mysql
+
+volumes:
+  mysql-data:
