@@ -1,5 +1,6 @@
 INSERT INTO stores (id, name, owner, tax_id) VALUES
-(1, 'Tech Hub', 'John Doe', '123456789');
+(1, 'Tech Hub', 'John Doe', '123456789'),
+(2, 'Gadget World', 'Jane Doe', '987654321');
 
 INSERT INTO computers (brand, memory, processor_features, operating_system, price, quantity, store_id) VALUES
 ('Apple MacBook Pro', 16, 'M1 Pro', 'macOS', 1999.99, 5, 1),
