@@ -47,26 +47,51 @@ Screenshot of class diagram or public link to diagrams.net file
 Screenshot of VSCode's testing section showing that test coverage has been met
 
 ---
-:mermaid
-A program needs to be developed to model a computer store. The store has the following attributes:
-Store name.
-Shop owner.
-Store tax ID.
-The computers in the store have the following attributes:
-Computer brand.
-Amount of memory.
-Processor features.
-Operating system.
-Computer price.
-The program must have methods that allow:
-Add a computer to the store.
-Remove a computer from the store given its brand.
-Search for a computer in the store given its brand.
-List the information of all the computers that the store has.
-Requirements:
-UML class diagram
-Mandatory unit tests (minimum coverage 70%)
-Deliverables:
-Github repository
-Screenshot of class diagram or public link to diagrams.net file
-Screenshot of VSCode's testing section showing that test coverage has been met
+```mermaid
+classDiagram
+    class Computer {
+        - Long id
+        - String brand
+        - int memory
+        - String processorFeatures
+        - String operatingSystem
+        - double price
+        - int quantity
+        - Store store
+    }
+
+    class Store {
+        - Long id
+        - String name
+        - String owner
+        - String taxId
+        + List~Computer~ computers
+    }
+
+    class Customer {
+        - Long id
+        - String name
+        - String email
+        - String phoneNumber
+    }
+
+    class Order {
+        - Long id
+        - Date orderDate
+        - double totalAmount
+        - Customer customer
+        - List~OrderItem~ items
+    }
+
+    class OrderItem {
+        - Long id
+        - int quantity
+        - Computer computer
+        - Order order
+    }
+
+    Computer --> Store : belongs to
+    Store --> Computer : manages *
+    Order --> Customer : placed by
+    Order --> OrderItem : contains *
+    OrderItem --> Computer : references
