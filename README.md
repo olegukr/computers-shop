@@ -1,3 +1,7 @@
+# The program is under constraction
+ # release coming soon
+
+
 Se requiere desarrollar un programa que modele una tienda de computadores. La tienda posee los siguientes atributos:
 Nombre de la tienda.
 Propietario de la tienda.
