@@ -1,6 +1,12 @@
 package factoriaf5.computers_shop;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "computers")
@@ -28,7 +34,7 @@ public class Computer {
     @Column(nullable = false)
     private int quantity; // New attribute to track the quantity of this model
 
-    @ManyToOne
+    // @ManyToOne
     @JoinColumn(name = "shop_id", nullable = false)
     private Shop shop;
 
@@ -82,5 +88,13 @@ public class Computer {
 
     public void setShop(Shop shop) {
         this.shop = shop;
+    }
+
+    public void setBrand(String brandString) {
+        this.brand = brandString;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

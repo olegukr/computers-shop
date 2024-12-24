@@ -1,7 +1,15 @@
 package factoriaf5.computers_shop;
 
-import jakarta.persistence.*;
 import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "shops")
@@ -25,6 +33,10 @@ public class Shop {
 
     public Shop() {}
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Shop(String name, String owner, String taxId) {
         this.name = name;
         this.owner = owner;
@@ -33,6 +45,10 @@ public class Shop {
 
     public Long getId() {
         return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -54,4 +70,6 @@ public class Shop {
     public void setComputers(List<Computer> computers) {
         this.computers = computers;
     }
+
+
 }
