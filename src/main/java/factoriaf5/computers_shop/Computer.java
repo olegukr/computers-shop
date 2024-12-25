@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -32,9 +33,9 @@ public class Computer {
     private double price;
 
     @Column(nullable = false)
-    private int quantity; // New attribute to track the quantity of this model
+    private int quantity;
 
-    // @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "shop_id", nullable = false)
     private Shop shop;
 
@@ -54,24 +55,48 @@ public class Computer {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getBrand() {
         return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public int getMemory() {
         return memory;
     }
 
+    public void setMemory(int memory) {
+        this.memory = memory;
+    }
+
     public String getProcessorFeatures() {
         return processorFeatures;
+    }
+
+    public void setProcessorFeatures(String processorFeatures) {
+        this.processorFeatures = processorFeatures;
     }
 
     public String getOperatingSystem() {
         return operatingSystem;
     }
 
+    public void setOperatingSystem(String operatingSystem) {
+        this.operatingSystem = operatingSystem;
+    }
+
     public double getPrice() {
         return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getQuantity() {
@@ -88,13 +113,5 @@ public class Computer {
 
     public void setShop(Shop shop) {
         this.shop = shop;
-    }
-
-    public void setBrand(String brandString) {
-        this.brand = brandString;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 }

@@ -1,5 +1,6 @@
 package factoriaf5.computers_shop;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -29,13 +30,9 @@ public class Shop {
     private String taxId;
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Computer> computers;
+    private List<Computer> computers = new ArrayList<>();
 
     public Shop() {}
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Shop(String name, String owner, String taxId) {
         this.name = name;
@@ -46,7 +43,7 @@ public class Shop {
     public Long getId() {
         return id;
     }
-    
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -55,12 +52,24 @@ public class Shop {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getOwner() {
         return owner;
     }
 
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
     public String getTaxId() {
         return taxId;
+    }
+
+    public void setTaxId(String taxId) {
+        this.taxId = taxId;
     }
 
     public List<Computer> getComputers() {
@@ -70,6 +79,4 @@ public class Shop {
     public void setComputers(List<Computer> computers) {
         this.computers = computers;
     }
-
-
 }
