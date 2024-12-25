@@ -3,6 +3,8 @@ package factoriaf5.computers_shop;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,6 +32,7 @@ public class Shop {
     private String taxId;
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Computer> computers = new ArrayList<>();
 
     public Shop() {}

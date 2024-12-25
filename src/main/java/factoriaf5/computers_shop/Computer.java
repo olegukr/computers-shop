@@ -1,5 +1,7 @@
 package factoriaf5.computers_shop;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,6 +39,7 @@ public class Computer {
 
     @ManyToOne
     @JoinColumn(name = "shop_id", nullable = false)
+    @JsonBackReference
     private Shop shop;
 
     public Computer() {}
