@@ -1,0 +1,51 @@
+services:
+  database:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: computers_shop
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      # start_period: 1m
+    volumes:
+      - mysql-data:/var/lib/mysql
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin-container
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      PMA_HOST: database
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8090:80"
+    restart: always
+
+  app:
+    build:
+      context: .
+    ports:
+      - "8089:8089"
+    environment:
+      SPRING_PROFILES_ACTIVE: mysql
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8089"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      # start_period: 3m
+
+volumes:
+  mysql-data:

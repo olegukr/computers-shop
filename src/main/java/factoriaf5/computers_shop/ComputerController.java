@@ -45,5 +45,11 @@ public class ComputerController {
     public void deleteComputer(@PathVariable Long id) {
         computerService.deleteComputer(id);
     }
+
+    // @GetMapping("/test")
+    // public String test() {
+    //     return "Controller is working!";
+    // }
+
 }
 

@@ -32,4 +32,16 @@ public class ShopController {
     public List<Computer> getComputersByShop(@PathVariable Long shopId) {
         return service.getComputersByShop(shopId);
     }
+
+    // Add this method for GET /api/shops
+    @GetMapping
+    public List<Shop> getAllShops() {
+        return service.getAllShops();
+    }
+
+    // @GetMapping("/test")
+    // public String test() {
+    //     return "Controller is working!";
+    // }
+
 }

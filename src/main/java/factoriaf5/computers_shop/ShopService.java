@@ -1,7 +1,8 @@
 package factoriaf5.computers_shop;
 
-import org.springframework.stereotype.Service;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class ShopService {
@@ -29,5 +30,10 @@ public class ShopService {
         Shop shop = shopRepository.findById(shopId)
                 .orElseThrow(() -> new IllegalArgumentException("Shop not found"));
         return shop.getComputers();
+    }
+
+    // Add this method to fetch all shops
+    public List<Shop> getAllShops() {
+        return shopRepository.findAll();
     }
 }
