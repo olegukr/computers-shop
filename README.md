@@ -1,5 +1,5 @@
 
-
+# Computers Shop
 
 Se requiere desarrollar un programa que modele una tienda de computadores. La tienda posee los siguientes atributos:
 Nombre de la tienda.
@@ -51,8 +51,6 @@ Screenshot of VSCode's testing section showing that test coverage has been met
 
 ---
 
-
-# Computers Shop
 
 ## Overview
 
@@ -223,55 +221,29 @@ erDiagram
 
 ```mermaid
 classDiagram
+    class Shop {
+        - Long id
+        - String name
+        - String owner
+        - String taxId
+        + getters and setters
+    }
+
     class Computer {
         - Long id
         - String brand
         - int memory
         - String processorFeatures
         - String operatingSystem
-        - double price
+        - BigDecimal price
         - int quantity
-        - Store store
+        - Long shopId
+        + getters and setters
     }
 
-    class Store {
-        - Long id
-        - String name
-        - String owner
-        - String taxId
-        + List~Computer~ computers
-    }
-
-    class Customer {
-        - Long id
-        - String name
-        - String email
-        - String phoneNumber
-    }
-
-    class Order {
-        - Long id
-        - Date orderDate
-        - double totalAmount
-        - Customer customer
-        - List~OrderItem~ items
-    }
-
-    class OrderItem {
-        - Long id
-        - int quantity
-        - Computer computer
-        - Order order
-    }
-
-    Computer --> Store : belongs to
-    Store --> Computer : manages *
-    Order --> Customer : placed by
-    Order --> OrderItem : contains *
-    OrderItem --> Computer : references
-
-
+    Shop "1" --> "many" Computer : "has many"
 ```
+
 ## License
 
 This project is licensed under the MIT License.
