@@ -1,6 +1,16 @@
 
 # Computers Shop
+```
+   _____                            _                   _____ _                 
+  / ____|                          | |                 / ____| |                
+ | |     ___  _ __ ___  _ __  _   _| |_ ___ _ __ ___  | (___ | |__   ___  _ __  
+ | |    / _ \| '_ ` _ \| '_ \| | | | __/ _ \ '__/ __|  \___ \| '_ \ / _ \| '_ \ 
+ | |___| (_) | | | | | | |_) | |_| | ||  __/ |  \__ \  ____) | | | | (_) | |_) |
+  \_____\___/|_| |_| |_| .__/ \__,_|\__\___|_|  |___/ |_____/|_| |_|\___/| .__/ 
+                       | |                                               | |    
+                       |_|  
 
+```
 Se requiere desarrollar un programa que modele una tienda de computadores. La tienda posee los siguientes atributos:
 Nombre de la tienda.
 Propietario de la tienda.
