@@ -1,5 +1,4 @@
-# The program is under constraction
- # release coming soon
+
 
 
 Se requiere desarrollar un programa que modele una tienda de computadores. La tienda posee los siguientes atributos:
@@ -51,6 +50,177 @@ Screenshot of class diagram or public link to diagrams.net file
 Screenshot of VSCode's testing section showing that test coverage has been met
 
 ---
+
+
+# Computers Shop
+
+## Overview
+
+The **Computers Shop** project is a Spring Boot application designed to manage a simple database of computer shops and their products. It includes features for creating, reading, updating, and deleting (CRUD) data related to shops and computers.
+
+---
+
+## Project Structure
+
+```
+src/
+├── main/
+│   ├── java/factoriaf5/computers_shop/
+│   │   ├── Computer.java               # JPA entity for Computers
+│   │   ├── ComputerController.java     # REST controller for Computers
+│   │   ├── ComputerRepository.java     # Repository for Computer entity
+│   │   ├── ComputerService.java        # Service layer for Computers
+│   │   ├── ComputersShopApplication.java # Spring Boot Application entry point
+│   │   ├── Shop.java                   # JPA entity for Shops
+│   │   ├── ShopController.java         # REST controller for Shops
+│   │   ├── ShopRepository.java         # Repository for Shop entity
+│   │   ├── ShopService.java            # Service layer for Shops
+│   ├── resources/
+│   │   ├── application.properties      # Spring Boot configuration
+│   │   ├── application-mysql.properties # MySQL profile configuration
+│   │   ├── application-h2.properties   # H2 profile configuration
+│   │   ├── schema.sql                  # Database schema definition
+│   │   ├── data.sql                    # Database initialization data
+│   │   ├── static/                     # Static web assets
+│   │   └── templates/                  # Thymeleaf templates
+├── Dockerfile                      # Docker image configuration
+├── docker-compose.yml              # Multi-container configuration
+├── pom.xml                         # Maven dependencies
+```
+
+---
+
+## Features
+
+1. **CRUD Operations**:
+   - Manage shops and their computers via RESTful APIs.
+
+2. **Database Support**:
+   - MySQL and H2 database configurations are included.
+
+3. **Preloaded Data**:
+   - The application preloads data into the database from `schema.sql` and `data.sql`.
+
+4. **Dockerized**:
+   - Includes Docker Compose for setting up the application with MySQL and phpMyAdmin.
+
+---
+
+## Setup and Installation
+
+### Prerequisites
+
+- Java 21
+- Maven 3.9+
+- Docker and Docker Compose (v2.30.3 or higher)
+
+### Steps
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/olegukr/computers-shop.git
+   cd computers-shop
+   ```
+
+2. **Build the Application**:
+   ```bash
+   mvn clean package
+   ```
+
+3. **Run with Docker**:
+   ```bash
+   docker compose up --build
+   ```
+
+4. **Access the Application**:
+   - Application: [http://localhost:8089](http://localhost:8089)
+   - phpMyAdmin: [http://localhost:8090](http://localhost:8090)
+
+---
+
+## Configuration Profiles
+
+- **Default Profile**:
+  - H2 Database.
+  - `application-h2.properties`.
+
+- **MySQL Profile**:
+  - MySQL Database.
+  - `application-mysql.properties`.
+  - Set active profile in `application.properties`:
+    ```properties
+    spring.profiles.active=mysql
+    ```
+
+---
+
+## Testing
+
+Run the tests using Maven:
+```bash
+mvn test
+```
+
+Test reports can be found in the `target/surefire-reports` directory.
+
+---
+
+## Database Schema
+
+- **Shops**:
+  - `id`: BIGINT, Primary Key
+  - `name`: VARCHAR(255)
+  - `owner`: VARCHAR(255)
+  - `tax_id`: VARCHAR(255)
+
+- **Computers**:
+  - `id`: BIGINT, Primary Key
+  - `brand`: VARCHAR(255)
+  - `memory`: INT
+  - `processor_features`: VARCHAR(255)
+  - `operating_system`: VARCHAR(255)
+  - `price`: DECIMAL(10,2)
+  - `quantity`: INT
+  - `shop_id`: BIGINT, Foreign Key (References `shops` table)
+
+
+```mermaid
+erDiagram
+    Shops {
+        BIGINT id PK
+        VARCHAR name
+        VARCHAR owner
+        VARCHAR tax_id
+    }
+    
+    Computers {
+        BIGINT id PK
+        VARCHAR brand
+        INT memory
+        VARCHAR processor_features
+        VARCHAR operating_system
+        DECIMAL price
+        INT quantity
+        BIGINT shop_id FK
+    }
+    
+    Shops ||--o{ Computers : "has many"
+```
+---
+
+## Troubleshooting
+
+1. **MySQL Container Fails to Start**:
+   - Ensure the `MYSQL_ROOT_PASSWORD` and `MYSQL_DATABASE` are correctly set in `docker-compose.yml`.
+
+2. **Application Fails to Connect to MySQL**:
+   - Verify the `spring.datasource.url` in `application-mysql.properties` matches the Docker network configuration.
+
+3. **Preloaded Data Not Appearing**:
+   - Ensure `schema.sql` and `data.sql` are correctly located in the `resources` folder.
+
+---
+
 ```mermaid
 classDiagram
     class Computer {
@@ -99,3 +269,9 @@ classDiagram
     Order --> Customer : placed by
     Order --> OrderItem : contains *
     OrderItem --> Computer : references
+
+
+```
+## License
+
+This project is licensed under the MIT License.
